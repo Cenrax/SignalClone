@@ -13,7 +13,6 @@ export default function ChatRoomScreen() {
             renderItem = {({item}) => <Message message={item}/>}
             inverted
             />
-            
         </View>
 
     )
