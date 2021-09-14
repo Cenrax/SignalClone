@@ -1,26 +1,27 @@
 import React from 'react';
 import { View, Image, Text , StyleSheet} from 'react-native';
+import Users from '../../assets/dummy-data/Users';
 import styles from './styles';
-export default function ChatRoomItem(props : any){
-    console.log(props)
+export default function ChatRoomItem({chatRoom}:any){
+    const userData = chatRoom.users[1];
     return(
         <View style = {styles.container}>
-            <Image source={{uri: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/elon.png'}} style = {styles.image}/>
-            <View style = {styles.badgeContainer}>
-                <Text style = {styles.badgeText}>4</Text>
-            </View>
+            <Image source={{uri: userData.imageUri}} style = {styles.image}/>
+            
+            {chatRoom.newMessages && <View style = {styles.badgeContainer}>
+                <Text style = {styles.badgeText}>{chatRoom.newMessages}</Text>
+            </View>}
+
+
             <View style = {styles.rightContainer}>
                 <View style = {styles.row}>
-                    <Text style ={styles.name}>Soham Ghosh</Text>
-                    <Text style = {styles.text}> 00:13 </Text>
+                    <Text style ={styles.name}>{userData.name}</Text>
+                    <Text style = {styles.text}>{chatRoom.lastMessage.createdAt} </Text>
                 </View>
                 <Text numberOfLines={1} style = {styles.text}>
-                    "Suman er opore raag holeo suman sotti khub bhalo. Suman is a very kind and honest guy."
+                    {chatRoom.lastMessage.content}
                 </Text>
-
             </View>
-
         </View>
-
     );
 }
