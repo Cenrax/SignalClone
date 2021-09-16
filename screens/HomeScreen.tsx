@@ -6,7 +6,7 @@ import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 import ChatRooms from '../assets/dummy-data/ChatRooms';
 
-export default function TabOneScreen() {
+export default function HomeScreen() {
   return (
     <View style = {styles.page}>
       <FlatList data = {ChatRooms} renderItem = {( {item})=> <ChatRoomItem chatRoom={item}/>} ListHeaderComponent={()=> <Text>Messages</Text>} />

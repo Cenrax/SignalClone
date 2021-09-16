@@ -11,6 +11,7 @@ import * as React from 'react';
 import { ColorSchemeName, Pressable } from 'react-native';
 
 import Colors from '../constants/Colors';
+import {Text, View, Image} from 'react-native';
 import useColorScheme from '../hooks/useColorScheme';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
@@ -19,7 +20,7 @@ import TabTwoScreen from '../screens/TabTwoScreen';
 import ChatRoomScreen from '../screens/ChatRoomScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
-
+import HomeScreen from '../screens/HomeScreen'
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
     <NavigationContainer
@@ -38,12 +39,28 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
   return (
-    <Stack.Navigator screenOptions = {{ headerShown: false}}>
-      <Stack.Screen name="ChatRoom" component={ChatRoomScreen} options={{ headerShown: true }} />
-      <Stack.Screen name="Root" component={BottomTabNavigator} />
+    <Stack.Navigator>
+      <Stack.Screen 
+        name="Home" 
+        component={HomeScreen}  
+        options = {{headerTitle: props => <HomeHeader {...props}/>}}
+        />
+      <Stack.Screen name="ChatRoom" component={ChatRoomScreen}  />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
     </Stack.Navigator>
   );
+}
+
+const HomeHeader = (props) =>{
+  return(
+    <View style ={{flexDirection: 'row'}}>
+      <Image source = {{uri: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/vadim.jpg'}}
+      style = {{width: 30, height: 30, borderRadius: 30}}
+      />
+      <Text style = {{flex:1}}>Home</Text>
+    </View>
+    
+  )
 }
 
 /**
