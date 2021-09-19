@@ -11,7 +11,7 @@ import * as React from 'react';
 import { ColorSchemeName, Pressable } from 'react-native';
 
 import Colors from '../constants/Colors';
-import {Text, View, Image} from 'react-native';
+import {Text, View, Image, useWindowDimensions} from 'react-native';
 import useColorScheme from '../hooks/useColorScheme';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
@@ -21,6 +21,7 @@ import ChatRoomScreen from '../screens/ChatRoomScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 import HomeScreen from '../screens/HomeScreen'
+import { Feather } from '@expo/vector-icons';
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
     <NavigationContainer
@@ -52,12 +53,20 @@ function RootNavigator() {
 }
 
 const HomeHeader = (props) =>{
+  const { width} = useWindowDimensions();
   return(
-    <View style ={{flexDirection: 'row'}}>
+    <View style ={{
+      flexDirection: 'row', 
+      justifyContent: 'space-around', 
+      padding: 10,
+      alignItems: 'center',
+      width}}>
       <Image source = {{uri: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/vadim.jpg'}}
       style = {{width: 30, height: 30, borderRadius: 30}}
       />
-      <Text style = {{flex:1}}>Home</Text>
+      <Text style = {{flex:1, textAlign: 'center', marginLeft: 50, fontWeight: 'bold'}}>Signal</Text>
+      <Feather name="camera" size={24} color="black" style = {{marginHorizontal:5}} />
+      <Feather name="edit-2" size={24} color="black" style = {{marginHorizontal: 5}} />
     </View>
     
   )
